@@ -1,0 +1,46 @@
+---
+---
+{%- comment -%}
+  Custom publication entry. Shows the first three authors then "et al.", bolds the
+  site owner, marks co-first authors with * (bib field `equal_contrib = {N}` marks the
+  first N authors), and links journal and year to the paper (`html` field, else DOI).
+{%- endcomment -%}
+{%- assign max_shown = 3 -%}
+{%- assign n_authors = entry.author_array | size -%}
+{%- assign n_equal = entry.equal_contrib | default: 0 | plus: 0 -%}
+
+{%- if entry.html -%}
+  {%- assign paper_url = entry.html -%}
+{%- elsif entry.doi -%}
+  {%- assign paper_url = entry.doi | prepend: 'https://doi.org/' -%}
+{%- endif -%}
+
+<div class="pub" id="{{ entry.key }}">
+  <div class="pub-title">{{ entry.title }}</div>
+
+  <div class="pub-authors">
+    {%- for author in entry.author_array limit: max_shown -%}
+      {%- assign is_self = false -%}
+      {%- if site.scholar.last_name contains author.last and site.scholar.first_name contains author.first -%}
+        {%- assign is_self = true -%}
+      {%- endif -%}
+      {%- if is_self -%}<strong>{{ author.first }} {{ author.last }}</strong>{%- else -%}{{ author.first }} {{ author.last }}{%- endif -%}
+      {%- if forloop.index <= n_equal -%}<span class="pub-star">*</span>{%- endif -%}
+      {%- unless forloop.last -%}, {% endunless -%}
+    {%- endfor -%}
+    {%- if n_authors > max_shown -%}, et al.{%- endif -%}
+  </div>
+
+  <div class="pub-venue">
+    {%- if paper_url -%}
+      <a class="pub-journal" href="{{ paper_url }}">{{ entry.journal }}</a><span class="pub-sep">,</span>
+      <a href="{{ paper_url }}">{{ entry.year }}</a>
+    {%- else -%}
+      <span class="pub-journal">{{ entry.journal }}</span>, {{ entry.year }}
+    {%- endif -%}
+  </div>
+
+  {%- if n_equal > 0 -%}
+    <div class="pub-note"><span class="pub-star">*</span> These authors contributed equally.</div>
+  {%- endif -%}
+</div>

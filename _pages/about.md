@@ -2,33 +2,93 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: Scientist I, <a href="https://alleninstitute.org/" target="_blank">Allen Institute</a>
 
 profile:
   align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+  image:
+  image_circular: false
+  more_info:
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+selected_papers: false
+social: false
 
 announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
+  enabled: false
 
 latest_posts:
-  enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+  enabled: false
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](https://www.reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+<section id="about" class="home-section">
+  <h2>about</h2>
+  <p>
+    I'm broadly interested in how the brain processes and transforms information, from large-scale network dynamics to computations
+    within individual neurons. My current research focuses on understanding how single neurons integrate and transform thousands of
+    synaptic inputs into spiking outputs, using two-photon imaging and combinations of voltage, calcium, and glutamate indicators.
+  </p>
+  <p>
+    During my doctoral research, I designed and developed microfluidic devices and combined them with in vivo calcium imaging and
+    confocal microscopy to study brain-wide neural dynamics underlying decision-making and sexually dimorphic behaviors in
+    <em>C. elegans</em>.
+  </p>
+</section>
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+<section id="publications" class="home-section">
+  <h2>publications</h2>
+  <div class="publications">
+{% bibliography %}
+  </div>
+</section>
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+<section id="projects" class="home-section">
+  <h2>projects</h2>
+  <p><em>Placeholder: project descriptions will go here.</em></p>
+</section>
+
+<section id="cv" class="home-section">
+  <h2>cv</h2>
+  {% assign cv = site.data.cv.cv %}
+  {% assign n = 0 %}
+
+  <h3 class="cv-group cv-group-experience">Experience</h3>
+  <div class="cv-list">
+    {% for e in cv.sections.Experience %}
+    <div class="cv-entry c{{ n | modulo: 10 }}">
+      <div class="cv-when">{{ e.start_date }} – {{ e.end_date }}</div>
+      <div class="cv-what">
+        <div class="cv-title">{{ e.position }}</div>
+        <div class="cv-sub">{{ e.company }}</div>
+      </div>
+    </div>
+    {% assign n = n | plus: 1 %}
+    {% endfor %}
+  </div>
+
+  <h3 class="cv-group cv-group-education">Education</h3>
+  <div class="cv-list">
+    {% for e in cv.sections.Education %}
+    <div class="cv-entry c{{ n | modulo: 10 }}">
+      <div class="cv-when">{{ e.start_date }} – {{ e.end_date }}</div>
+      <div class="cv-what">
+        <div class="cv-title">{{ e.studyType }}</div>
+        <div class="cv-sub">{{ e.institution }}</div>
+      </div>
+    </div>
+    {% assign n = n | plus: 1 %}
+    {% endfor %}
+  </div>
+
+  <h3 class="cv-group cv-group-conferences">Conferences</h3>
+  <div class="cv-list">
+    {% for e in cv.sections.Conferences %}
+    <div class="cv-entry c{{ n | modulo: 10 }}">
+      <div class="cv-when">{{ e.label }}</div>
+      <div class="cv-what">
+        <div class="cv-sub cv-sub-strong">{{ e.details }}</div>
+      </div>
+    </div>
+    {% assign n = n | plus: 1 %}
+    {% endfor %}
+  </div>
+</section>

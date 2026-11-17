@@ -1,0 +1,236 @@
+/*******************************************************************************
+ * Publications (custom). Markup comes from _layouts/bib.liquid.
+ ******************************************************************************/
+
+.publications {
+  margin-top: 1.5rem;
+
+  // Year headings (jekyll-scholar group_by year)
+  h2.bibliography {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--global-text-color-light);
+    border-top: 1px solid var(--global-divider-color);
+    padding-top: 1rem;
+    margin: 2.25rem 0 1rem;
+    text-align: left;
+  }
+
+  ol.bibliography {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    > li {
+      margin-bottom: 1rem;
+
+      &:nth-child(10n + 1) { --card-accent: var(--accent-pink); }
+      &:nth-child(10n + 2) { --card-accent: var(--accent-teal); }
+      &:nth-child(10n + 3) { --card-accent: var(--accent-blue); }
+      &:nth-child(10n + 4) { --card-accent: var(--accent-lime); }
+      &:nth-child(10n + 5) { --card-accent: var(--accent-peach); }
+      &:nth-child(10n + 6) { --card-accent: var(--accent-lavender); }
+      &:nth-child(10n + 7) { --card-accent: var(--accent-mint); }
+      &:nth-child(10n + 8) { --card-accent: var(--accent-rose); }
+      &:nth-child(10n + 9) { --card-accent: var(--accent-orange); }
+      &:nth-child(10n + 10) { --card-accent: var(--accent-orchid); }
+    }
+  }
+
+  .pub {
+    background: var(--global-card-bg-color);
+    border: 1px solid var(--global-divider-color);
+    border-left: 3px solid var(--card-accent, var(--accent-teal));
+    border-radius: 0.6rem;
+    padding: 1rem 1.25rem;
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease;
+
+    &:hover {
+      border-color: var(--card-accent, var(--accent-teal));
+    }
+
+    .pub-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--global-text-color);
+      margin-bottom: 0.35rem;
+    }
+
+    .pub-authors {
+      color: var(--global-text-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+
+      strong {
+        color: var(--accent-peach);
+        font-weight: 700;
+      }
+
+      .pub-star {
+        color: var(--accent-teal);
+        font-weight: 600;
+        margin-left: 0.05em;
+      }
+    }
+
+    .pub-venue {
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+      color: var(--global-text-color-light);
+
+      a {
+        color: var(--global-theme-color);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition:
+          color 0.15s ease,
+          border-color 0.15s ease;
+
+        &:hover {
+          color: var(--global-hover-color);
+          border-bottom-color: var(--global-hover-color);
+        }
+      }
+
+      .pub-journal {
+        font-style: italic;
+      }
+
+      .pub-sep {
+        margin: 0 0.15em;
+      }
+    }
+
+    .pub-note {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--global-text-color-light);
+    }
+  }
+}
+
+/*******************************************************************************
+ * One-page home: smooth scrolling and section spacing
+ ******************************************************************************/
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; // keep section titles clear of the fixed navbar
+}
+
+.home-section {
+  margin-top: 3rem;
+
+  > h2 {
+    color: var(--section-accent, var(--global-theme-color));
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+}
+
+#about { --section-accent: var(--accent-pink); }
+#publications { --section-accent: var(--accent-teal); }
+#projects { --section-accent: var(--accent-lime); }
+
+/*******************************************************************************
+ * CV section: colored group titles, minimal timeline
+ ******************************************************************************/
+
+#cv { --section-accent: var(--accent-lavender); }
+
+.cv-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 2rem 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g, var(--accent-teal));
+
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--g, var(--accent-teal)), transparent);
+    opacity: 0.45;
+  }
+}
+
+.cv-group-experience { --g: var(--accent-pink); }
+.cv-group-education { --g: var(--accent-blue); }
+.cv-group-conferences { --g: var(--accent-orange); }
+
+.cv-list {
+  border-left: 1px solid var(--global-divider-color);
+  margin-left: 0.4rem;
+  padding-left: 1.5rem;
+}
+
+.cv-entry {
+  --c: var(--accent-teal);
+  position: relative;
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1rem;
+  padding: 0.45rem 0 0.85rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    top: 0.95rem;
+    width: 0.65rem;
+    height: 0.65rem;
+    margin-left: -0.325rem;
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow: 0 0 0 4px var(--global-bg-color);
+  }
+
+  .cv-when {
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--c);
+    padding-top: 0.2rem;
+  }
+
+  .cv-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--c);
+    line-height: 1.35;
+  }
+
+  .cv-sub {
+    color: var(--global-text-color);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .cv-sub-strong {
+    padding-top: 0.1rem;
+  }
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+}
+
+.c0 { --c: var(--accent-pink); }
+.c1 { --c: var(--accent-teal); }
+.c2 { --c: var(--accent-blue); }
+.c3 { --c: var(--accent-lime); }
+.c4 { --c: var(--accent-peach); }
+.c5 { --c: var(--accent-lavender); }
+.c6 { --c: var(--accent-mint); }
+.c7 { --c: var(--accent-rose); }
+.c8 { --c: var(--accent-orange); }
+.c9 { --c: var(--accent-orchid); }
