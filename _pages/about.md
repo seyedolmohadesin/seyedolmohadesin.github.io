@@ -22,6 +22,7 @@ latest_posts:
 
 <section id="about" class="home-section">
   <h2>about</h2>
+  <p>Hi! I'm Maedeh, I'm a scientist at the Allen Institute in the optical physiology group.</p>
   <p>
     I'm broadly interested in how the brain processes and transforms information, from large-scale network dynamics to computations
     within individual neurons. My current research focuses on understanding how single neurons integrate and transform thousands of
